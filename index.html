@@ -17,9 +17,8 @@
         <canvas></canvas>
         <script>
             const canvasEl = document.querySelector("canvas"),
-            canvasCtx = canvasEl.getContext("2d")
-
-            const lineWidth = 15
+            canvasCtx = canvasEl.getContext("2d"),
+            gapX = 10
 
             const field = {
                 w: window.innerWidth,
@@ -44,6 +43,28 @@
                 }
             }
 
+            const leftRacket = {
+                x: gapX,
+                y: 100,
+                w: line.w,
+                h: 200,
+                draw: function() {
+                    canvasCtx.fillStyle = "#ffffff",
+                    canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+                }
+            }
+
+            const rightRacket = {
+                x: field.w - line.w - gapX,
+                y: 100,
+                w: line.w,
+                h: 200,
+                draw: function() {
+                    canvasCtx.fillStyle = "#ffffff",
+                    canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+                }
+            }
+
             function setup() {
                 canvasEl.width = canvasCtx.width = field.w
                 canvasEl.height = canvasCtx.height = field.h
@@ -52,18 +73,9 @@
             function draw() {
                 field.draw()
                 line.draw()
+                leftRacket.draw()
+                rightRacket.draw()
 
-            
-                //draws left racket
-                canvasCtx.fillRect(10, 400, lineWidth, 200)
-
-                //draws right racket
-                canvasCtx.fillRect(
-                    window.innerWidth - lineWidth - 10,
-                    120,
-                    lineWidth,
-                    200
-                )
 
                 //draws the puck
                 canvasCtx.beginPath()
