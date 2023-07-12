@@ -21,26 +21,39 @@
 
             const lineWidth = 15
 
+            const field = {
+                w: window.innerWidth,
+                h: window.innerHeight,
+                draw: function() {
+                    canvasCtx.fillStyle = "#286047"
+                    canvasCtx.fillRect(0, 0, this.w, this.h)
+                }
+            }
+
+            const line = {
+                w: 15,
+                h: field.h,
+                draw: function() {
+                    canvasCtx.fillStyle = "#ffffff",
+                    canvasCtx.fillRect(
+                        (field.w / 2) - (this.w / 2), 
+                        0, 
+                        this.w, 
+                        this.h
+                    )
+                }
+            }
+
             function setup() {
-                canvasEl.width = canvasCtx.width = window.innerWidth
-                canvasEl.height = canvasCtx.height = window.innerHeight
+                canvasEl.width = canvasCtx.width = field.w
+                canvasEl.height = canvasCtx.height = field.h
             }
 
             function draw() {
-                //draws the field
-                canvasCtx.fillStyle = "#286047"
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+                field.draw()
+                line.draw()
 
-                canvasCtx.fillStyle = "#ffffff"
-
-                //draws line
-                canvasCtx.fillRect(
-                    (window.innerWidth / 2) - (lineWidth / 2), 
-                    0, 
-                    lineWidth, 
-                    window.innerHeight
-                )
-
+            
                 //draws left racket
                 canvasCtx.fillRect(10, 400, lineWidth, 200)
 
