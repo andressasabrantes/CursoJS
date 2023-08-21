@@ -82,12 +82,19 @@
                 x: 300,
                 y: 200, 
                 r: 20,
+                speed: 5,
+                _move: function () {
+                    this.x += 1 * this.speed
+                    this.y += 1 * this.speed
+                },
                 draw: function() {
                     canvasCtx.fillStyle = "#ffffff",
                     canvasCtx.beginPath()
                     canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false)
                     canvasCtx.fill()
-                }
+
+                    this._move()
+                },
             }
 
             function setup() {
@@ -98,14 +105,19 @@
             function draw() {
                 field.draw()
                 line.draw()
+
                 leftRacket.draw()
                 rightRacket.draw()
+
+                score.draw()  
+
                 ball.draw()
-                score.draw()                
             }
 
             setup()
             draw()
+
+            window.setInterval(draw, 1000 / 60)
         </script>
     </body>
 </html>
